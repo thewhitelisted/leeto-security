@@ -13,3 +13,8 @@ Our algorithms were created by Kaden Seto, a grade 11 student at St. Augustine C
 
 NOTE TO KADEN
 --module-path "PATH TO JFX20" --add-modules=javafx.controls,javafx.fxml
+
+
+NOTE TO OTHER READERS
+
+# THIS IS NOT FINISHED, THIS IS FOR CHEM CPT CURRENTLY IN PROGRESS
