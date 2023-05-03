@@ -32,7 +32,6 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -45,7 +44,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
         <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
             <tabs>
@@ -71,14 +70,14 @@
                                                 <Font size="14.0" />
                                             </font>
                                         </Label>
-                                        <TextField layoutX="97.0" layoutY="460.0" prefHeight="10.0" prefWidth="134.0" promptText="Required" AnchorPane.bottomAnchor="87.20001605694154" AnchorPane.leftAnchor="97.0" AnchorPane.rightAnchor="11.0" />
+                                        <TextField fx:id="OrganizationField" layoutX="97.0" layoutY="460.0" prefHeight="10.0" prefWidth="134.0" promptText="Required" AnchorPane.bottomAnchor="87.20001605694154" AnchorPane.leftAnchor="97.0" AnchorPane.rightAnchor="11.0" />
                                         <Label layoutX="11.0" layoutY="495.99999999999994" text="Key: " AnchorPane.bottomAnchor="55.63078541772654" AnchorPane.leftAnchor="11.0">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
                                         </Label>
-                                        <TextField layoutX="41.0" layoutY="494.20001605694154" prefHeight="10.0" prefWidth="189.0" promptText="Optional" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="10.0" />
-                                        <Button layoutX="10.0" layoutY="534.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="219.0" text="Create Secure Password" AnchorPane.bottomAnchor="13.200016056941536" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                        <TextField fx:id="OptionalKeyField" layoutX="41.0" layoutY="494.20001605694154" prefHeight="10.0" prefWidth="189.0" promptText="Optional" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="10.0" />
+                                        <Button fx:id="CreatePasswordButton" layoutX="10.0" layoutY="534.0" mnemonicParsing="false" onAction="#CreatePasswordButtonClick" prefHeight="25.0" prefWidth="219.0" text="Create Secure Password" AnchorPane.bottomAnchor="13.200016056941536" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="572.0" prefWidth="218.0">
@@ -88,36 +87,26 @@
                                                 <Font name="MT Extra" size="18.0" fx:id="x2" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="14.0" layoutY="59.0" text="Organization: " AnchorPane.leftAnchor="14.0">
+                                        <Label fx:id="dateLabel" layoutX="14.0" layoutY="172.0" text="Date Created: " AnchorPane.leftAnchor="14.0"> <!-- Changed from Organization to Date Created-->
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="101.0" layoutY="50.0" prefHeight="26.0" prefWidth="98.0" text="null" wrapText="true" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="19.0">
-                                            <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                            </padding>
-                                        </Label>
-                                        <Label layoutX="12.0" layoutY="97.0" text="Key: " AnchorPane.leftAnchor="14.0">
+                                        <Label fx:id="keyLabel" layoutX="12.0" layoutY="97.0" text="Key: " AnchorPane.leftAnchor="14.0">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="48.0" layoutY="88.0" prefHeight="38.0" prefWidth="152.0" text="null" wrapText="true" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="19.0">
-                                            <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                            </padding>
-                                        </Label>
-                                        <Label layoutX="14.0" layoutY="135.0" text="Password: " AnchorPane.leftAnchor="14.0">
+                                        <Label fx:id="passwordLabel" layoutX="14.0" layoutY="135.0" text="Password: " AnchorPane.leftAnchor="14.0">
                                             <font>
                                                 <Font size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="81.0" layoutY="126.0" prefHeight="38.0" prefWidth="118.0" text="null" wrapText="true">
-                                            <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                            </padding>
-                                        </Label>
+                              <Label layoutX="14.0" layoutY="63.0" text="Organization: ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="572.0" prefWidth="380.0">
@@ -127,6 +116,25 @@
                                                 <Font name="MT Extra" size="18.0" fx:id="x3" />
                                             </font>
                                         </Label>
+                              <Label layoutX="14.0" layoutY="60.0" text="Organization: ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="101.0" layoutY="57.0" prefHeight="25.0" prefWidth="326.0" promptText="Optional" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="21.0" />
+                              <Label fx:id="keyLabel1" layoutX="14.0" layoutY="95.0" text="Key: ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="44.0" layoutY="92.0" prefHeight="25.0" prefWidth="382.0" promptText="Optional" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="21.0" />
+                              <Label layoutX="14.0" layoutY="134.0" text="Password: ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="101.0" layoutY="131.0" prefHeight="25.0" prefWidth="326.0" promptText="Optional" />
+                              <Button fx:id="CreatePasswordButton1" layoutX="20.0" layoutY="169.0" mnemonicParsing="false" onAction="#CreatePasswordButtonClick" prefHeight="25.0" prefWidth="403.0" text="Change Password" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                                     </children>
                                 </AnchorPane>
                             </items>
@@ -147,8 +155,13 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <PasswordField layoutX="19.0" layoutY="65.0" prefHeight="25.0" prefWidth="207.0" promptText="Enter password" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="65.0" />
-                                <Button layoutX="250.0" layoutY="65.0" mnemonicParsing="false" text="Check Password" AnchorPane.leftAnchor="250.0" />
+                                <PasswordField fx:id="PasswordCheckField" layoutX="19.0" layoutY="65.0" prefHeight="25.0" prefWidth="207.0" promptText="Enter password" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="65.0" />
+                                <Button fx:id="PasswordCheckButton" layoutX="250.0" layoutY="65.0" mnemonicParsing="false" onAction="#PasswordCheckButton" text="Check Password" AnchorPane.leftAnchor="250.0" />
+                                <Label fx:id="ratingLabel" layoutX="19.0" layoutY="115.0">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
                             </children>
                         </AnchorPane>
                     </content>
