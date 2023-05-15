@@ -5,11 +5,10 @@
  */
 package sample;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,8 +19,25 @@ public class FileIO {
         FileOutputStream fs = null;
         try {
             // make smth that adds a number if it already exists idk when creating multiple of same name
-            fs = new FileOutputStream("passwordlist.txt");
-            fs.write(password.name.getBytes("UTF-8"));
+            fs = new FileOutputStream("passwordlist.txt", true);
+            List<String> passwordList = store();
+
+            //Check for instances of the same password name:
+            //If it already exists, then handle the exception
+            int maxIndex = 0;
+            String name = password.getName() + maxIndex;
+
+            boolean exists = exists(password, passwordList);
+
+            String newLine = System.lineSeparator();
+            //If the password does not exist in the list, print to text file, else return a message saying password already exists
+            if (!exists) {
+                fs.write((password.name + newLine).getBytes(StandardCharsets.UTF_8));
+            } else {
+                System.out.println("Password Already Exists");
+                return;
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,19 +55,48 @@ public class FileIO {
             ex.printStackTrace();
         }
     }
+
     public static Password importData(String name){
         try (FileInputStream fis = new FileInputStream(name+".dat");
             ObjectInputStream ois = new ObjectInputStream(fis)) {
 
-           // read object from file
-           Password user = (Password) ois.readObject();
-
-           // print object
-           return user;
+           // read object from file and print object
+           return (Password) ois.readObject();
 
        } catch (IOException | ClassNotFoundException ex) {
            ex.printStackTrace();
            return null;
        }
     }
+
+    public static List<String> store() throws IOException {
+        FileReader fr = new FileReader("passwordlist.txt");
+        BufferedReader br = new BufferedReader(fr);
+
+        String line;
+        List<String> passwordList = new ArrayList<>();
+        while ((line = br.readLine()) != null) {
+            passwordList.add(line);
+        }
+        fr.close();
+        br.close();
+        return passwordList;
+
+    }
+
+    public static boolean exists(Password password, List<String> passwordList) {
+        boolean alreadyExists = false;
+
+        for (int i = 0; i < passwordList.size(); i++) {
+            if (password.getName().equals(passwordList.get(i))) {
+                System.out.println("The password already exists.");
+                alreadyExists = true;
+                break;
+            }
+        }
+
+        return alreadyExists;
+
+    }
+
 }

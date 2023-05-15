@@ -15,7 +15,8 @@ import java.security.NoSuchAlgorithmException;
 public class Password implements Serializable{
     String name;
     String key;
-    String timeCreated;
+    String timeCreated = "";
+    String organization;
     //default serialVersion id
     private static final long serialVersionUID = 1L;
     
@@ -48,8 +49,13 @@ public class Password implements Serializable{
     public String getTimeCreated(){
         return this.timeCreated;
     }
-    
+
     public void setTimeCreated(String timeCreated){
-        this.timeCreated = timeCreated;
+        this.timeCreated = timeCreated;}
+
+    @Override
+    public String toString() {
+        return name + ", " + key + ", " + timeCreated;
     }
+
 }
