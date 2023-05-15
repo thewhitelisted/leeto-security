@@ -1,8 +1,11 @@
 package sample;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,8 +23,9 @@ public class Algorithms {
         byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
         
         // Compute the hash of the input byte array using the MessageDigest object
-
-        return md.digest(inputBytes);
+        byte[] hashedBytes = md.digest(inputBytes); 
+        
+        return hashedBytes;
 
     }
     public static String conversion(byte[] hash) {
@@ -54,7 +58,7 @@ public class Algorithms {
     }
 
     //input variable can be anything, I just needed to make a String method that returned a formatted date.
-    public static String getDate_Time() {
+    public static String getDate_Time() throws Exception {
         LocalDateTime currentDate_Time = LocalDateTime.now();
         //Desired Date/Time Format:
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy h:mm a"); //Format the current date and time
@@ -64,7 +68,7 @@ public class Algorithms {
     public static String createPassword(int letterCount) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?-().";
         String generatedPassword = "";
-        char randomLetter;
+        char randomLetter = ' ';
         StringBuilder generate = new StringBuilder(letterCount);
         int maximum = characters.length();
 
@@ -112,19 +116,26 @@ public class Algorithms {
         }
 
 
-        return switch (rating) {
-            case 0 ->
-                    "Very Weak. Your password truly needs improvements, and I recommend using our Password Creator Algorithms to create a secure password.";
-            case 1 ->
-                    "Weak. You need to make improvements to your password, such as including more symbols for complexity or making it longer.";
-            case 2 ->
-                    "Ok. It can still be improved, but at least your password can defend against less experienced attackers.";
-            case 3 ->
-                    "Strong. Consider adding just a little more improvements to your password, and it will be extremely strong!";
-            case 4 ->
-                    "Very strong. Your complex password, partnered with our advanced hashing algorithms, will surely defend against all types of attackers.";
-            default -> "";
-        };
+        String strRating = "";
+        switch (rating) {
+            case 0:
+                strRating = "Very Weak. Your password truly needs improvements, and I recommend using our Password Creator Algorithms to create a secure password.";
+                break;
+            case 1:
+                strRating = "Weak. You need to make improvements to your password, such as including more symbols for complexity or making it longer.";
+                break;
+            case 2:
+                strRating = "Ok. It can still be improved, but at least your password can defend against less experienced attackers.";
+                break;
+            case 3:
+                strRating = "Strong. Consider adding just a little more improvements to your password, and it will be extremely strong!";
+                break;
+            case 4:
+                strRating = "Very strong. Your complex password, partnered with our advanced hashing algorithms, will surely defend against all types of attackers.";
+                break;
+
+        }
+        return strRating;
     }
 
 

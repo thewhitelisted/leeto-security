@@ -16,7 +16,7 @@ public class Password implements Serializable{
     String name;
     String key;
     String timeCreated = "";
-    String organization;
+
     //default serialVersion id
     private static final long serialVersionUID = 1L;
     
