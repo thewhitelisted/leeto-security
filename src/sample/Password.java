@@ -26,7 +26,7 @@ public class Password implements Serializable{
         this.timeCreated = timeCreated;
     }
     
-    public static String returnHashed(String key) throws NoSuchAlgorithmException {
+    public String returnHashed(String key) throws NoSuchAlgorithmException {
         return Algorithms.hashString(key);
     }
     

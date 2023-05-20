@@ -9,10 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.Duration;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.*;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -48,8 +54,6 @@ public class Controller implements Initializable {
     TextField EditOrganizationField;
     @FXML
     TextField EditKeyField;
-    @FXML
-    TextField EditPasswordField;
 
     @FXML
     Button PasswordCheckButton = new Button();
@@ -64,6 +68,9 @@ public class Controller implements Initializable {
 
     @FXML
     TextField searchField;
+
+    @FXML
+    Button copyButton;
 
     Password currentPassword;
 
@@ -176,6 +183,17 @@ public class Controller implements Initializable {
             listView.getItems().addAll(passwords);
 
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void copyButtonButtonClick(ActionEvent actionEvent) throws NoSuchAlgorithmException {
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        try {
+            String pass = currentPassword.returnHashed(currentPassword.key);
+            clipboard.setContents(new StringSelection(pass), new StringSelection(pass));
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }
