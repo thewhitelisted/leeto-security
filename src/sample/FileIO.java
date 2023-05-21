@@ -87,8 +87,8 @@ public class FileIO {
     public static boolean exists(Password password, List<String> passwordList) {
         boolean alreadyExists = false;
 
-        for (int i = 0; i < passwordList.size(); i++) {
-            if (password.getName().equals(passwordList.get(i))) {
+        for (String s : passwordList) {
+            if (password.getName().equals(s)) {
                 System.out.println("The password already exists.");
                 alreadyExists = true;
                 break;
