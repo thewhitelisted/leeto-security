@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ public class Main extends Application {
 
         stage.setTitle("Leeto Security");
         stage.setMaximized(true);
+        stage.getIcons().add(new Image("leetosecuritylogo.png"));
         stage.setScene(scene);
 
         stage.show();
