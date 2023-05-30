@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import java.io.File;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.Duration;
@@ -21,6 +22,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.*;
 import java.net.URL;
+import java.nio.Buffer;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -68,6 +70,9 @@ public class Controller implements Initializable {
 
     @FXML
     TextField searchField;
+
+    @FXML
+    Button deleteButton;
 
     @FXML
     Button copyButton;
@@ -217,6 +222,7 @@ public class Controller implements Initializable {
         recommendedList.setText(sb.toString());
     }
 
+
     @FXML
     public void ChangePasswordButtonClick(ActionEvent actionEvent) {
         try {
@@ -255,8 +261,7 @@ public class Controller implements Initializable {
             PrintWriter pw = new PrintWriter("passwordlist.txt");
             pw.print("");
             pw.close();
-            for (int i = 0; i < passwords.size(); i++) {
-                Password getPassword = passwords.get(i);
+            for (Password getPassword : passwords) {
                 FileIO.exportData(getPassword);
             }
             listView.setItems(createPasswordList());
